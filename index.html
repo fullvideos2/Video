@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Videolar</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+}
+button {
+  margin: 5px;
+  padding: 10px 15px;
+}
+iframe {
+  width: 100%;
+  height: 80vh;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Videolar</h2>
+
+<button onclick="load(1)">Video 1</button>
+<button onclick="load(2)">Video 2</button>
+<button onclick="load(3)">Video 3</button>
+<button onclick="load(4)">Video 4</button>
+<button onclick="load(5)">Video 5</button>
+
+<iframe id="player"></iframe>
+
+<script>
+const videos = {
+  1: "EMBED1",
+  2: "EMBED2",
+  3: "EMBED3",
+  4: "EMBED4",
+  5: "EMBED5"
+};
+
+function load(n) {
+  document.getElementById("player").src = videos[n];
+}
+
+load(1);
+</script>
+
+</body>
+</html>
