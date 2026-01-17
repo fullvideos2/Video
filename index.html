@@ -64,12 +64,22 @@ const videos = {
   4: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/365351101239/index.m3u8",
   5: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/53652871936/index.m3u8"
 };
+  <br>
+
+<!-- İleri / Geri Butonları -->
+<button onclick="seek(-10)">« 10 sn geri</button>
+<button onclick="seek(10)">10 sn ileri »</button>
+  
 
 // Video yükleme fonksiyonu
 function loadVideo(n) {
   const player = document.getElementById("player");
   player.src = videos[n];
   player.play();
+}
+  // Seek fonksiyonu (buton ile sarma)
+function seek(seconds){
+  player.currentTime += seconds;
 }
 
 // Sayfa açıldığında 1. videoyu başlat
