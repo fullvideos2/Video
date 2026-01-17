@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -66,9 +66,9 @@ const videos = {
 };
   <br>
 
-<!-- İleri / Geri Butonları -->
+/*<!-- İleri / Geri Butonları -->
 <button onclick="seek(-10)">« 10s yza</button>
-<button onclick="seek(10)">10s one »</button>
+<button onclick="seek(10)">10s one »</button>*/
   
 
 // Video yükleme fonksiyonu
@@ -77,11 +77,11 @@ function loadVideo(n) {
   player.src = videos[n];
   player.play();
 }
-  // Seek fonksiyonu (buton ile sarma)
+ /* // Seek fonksiyonu (buton ile sarma)
 function seek(seconds){
   player.currentTime += seconds;
 }
-
+*/
 // Sayfa açıldığında 1. videoyu başlat
 loadVideo(1);
 </script>
