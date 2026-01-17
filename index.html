@@ -1,38 +1,31 @@
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <title>Videolar</title>
 <style>
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
   background-color: #000;
   color: #fff;
   text-align: center;
+  font-family: Arial, sans-serif;
 }
-h2 {
-  margin-top: 20px;
-}
+h2 { margin-top: 20px; }
 button {
   margin: 5px;
   padding: 10px 20px;
-  cursor: pointer;
-  background-color: #444;
-  border: none;
-  color: white;
   font-size: 16px;
+  cursor: pointer;
   border-radius: 5px;
+  border: none;
+  background-color: #444;
+  color: #fff;
 }
-button:hover {
-  background-color: #666;
-}
+button:hover { background-color: #666; }
 video {
   margin-top: 20px;
   width: 90%;
   max-width: 800px;
-  height: auto;
-  border: 2px solid #333;
   border-radius: 10px;
   background-color: black;
 }
@@ -42,47 +35,49 @@ video {
 
 <h2>Videolar</h2>
 
-<!-- Video seçim butonları -->
+<!-- Video Seçim Butonları -->
 <button onclick="loadVideo(1)">Video 1</button>
 <button onclick="loadVideo(2)">Video 2</button>
 <button onclick="loadVideo(3)">Video 3</button>
 <button onclick="loadVideo(4)">Video 4</button>
 <button onclick="loadVideo(5)">Video 5</button>
 
-<!-- Video oynatıcı -->
+<br>
+
+<!-- İleri / Geri Butonları -->
+<button onclick="seek(-10)">« 10 sn geri</button>
+<button onclick="seek(10)">10 sn ileri »</button>
+
+<!-- Video Player -->
 <video id="player" controls autoplay>
   <source src="" type="video/mp4">
   Tarayıcınız video etiketini desteklemiyor.
 </video>
 
 <script>
-// Buraya indirilebilir video linklerini koy
+// Video linklerini buraya ekle
 const videos = {
-  1: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/380242161314/index.m3u8",
-  2: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/65350694660/index.m3u8",
-  3: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/91587250615/index.m3u8",
-  4: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/365351101239/index.m3u8",
-  5: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/53652871936/index.m3u8"
+  1: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/36760520400/index.m3u8",
+  2: "https://example.com/video2.mp4",
+  3: "https://example.com/video3.mp4",
+  4: "https://example.com/video4.mp4",
+  5: "https://example.com/video5.mp4"
 };
-  <br>
 
-/*<!-- İleri / Geri Butonları -->
-<button onclick="seek(-10)">« 10s yza</button>
-<button onclick="seek(10)">10s one »</button>*/
-  
+const player = document.getElementById("player");
 
 // Video yükleme fonksiyonu
-function loadVideo(n) {
-  const player = document.getElementById("player");
+function loadVideo(n){
   player.src = videos[n];
   player.play();
 }
- /* // Seek fonksiyonu (buton ile sarma)
+
+// Seek fonksiyonu (buton ile sarma)
 function seek(seconds){
   player.currentTime += seconds;
 }
-*/
-// Sayfa açıldığında 1. videoyu başlat
+
+// Sayfa açıldığında 1. video başlasın
 loadVideo(1);
 </script>
 
