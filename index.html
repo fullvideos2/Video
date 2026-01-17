@@ -2,13 +2,13 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Videolar</title>
+<title>Telegram Videolar</title>
 <style>
 body {
   background-color: #000;
   color: #fff;
-  text-align: center;
   font-family: Arial, sans-serif;
+  text-align: center;
 }
 h2 { margin-top: 20px; }
 button {
@@ -22,18 +22,23 @@ button {
   color: #fff;
 }
 button:hover { background-color: #666; }
-video {
+.iframe-container {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.telegram-video {
   width: 90%;
   max-width: 800px;
   border-radius: 10px;
-  background-color: black;
+  margin-bottom: 20px;
 }
 </style>
 </head>
 <body>
 
-<h2>Videolar</h2>
+<h2>Telegram Videolar</h2>
 
 <!-- Video Seçim Butonları -->
 <button onclick="loadVideo(1)">Video 1</button>
@@ -42,42 +47,34 @@ video {
 <button onclick="loadVideo(4)">Video 4</button>
 <button onclick="loadVideo(5)">Video 5</button>
 
-<br>
-
-<!-- İleri / Geri Butonları -->
-<button onclick="seek(-10)">«  10s yza</button>
-<button onclick="seek(10)">10s one  »</button>
-
-<!-- Video Player -->
-<video id="player" controls autoplay>
-  <source src="" type="video/mp4">
-  Tarayıcınız video etiketini desteklemiyor.
-</video>
+<div class="iframe-container" id="videoContainer"></div>
 
 <script>
-// Video linklerini buraya ekle
-const videos = {
-  1: "https://cdn4.mozlineshop.com/mp4/files/pxp/hls/36760520400/index.m3u8",
-  2: "https://example.com/video2.mp4",
-  3: "https://example.com/video3.mp4",
-  4: "https://example.com/video4.mp4",
-  5: "https://example.com/video5.mp4"
+// Telegram post bilgileri: kanaladı/mesajID
+const telegramVideos = {
+  1: "https://t.me/c/2253727744/1415",
+  2: "kanaladi/124",
+  3: "kanaladi/125",
+  4: "kanaladi/126",
+  5: "kanaladi/127"
 };
 
-const player = document.getElementById("player");
-
-// Video yükleme fonksiyonu
 function loadVideo(n){
-  player.src = videos[n];
-  player.play();
+  const container = document.getElementById("videoContainer");
+  container.innerHTML = ""; // Önceki video sil
+  const post = telegramVideos[n];
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://telegram.org/js/telegram-widget.js?22";
+  script.setAttribute("data-telegram-post", post);
+  script.setAttribute("data-width", "100%");
+  script.setAttribute("data-userpic", "false");
+
+  container.appendChild(script);
 }
 
-// Seek fonksiyonu (buton ile sarma)
-function seek(seconds){
-  player.currentTime += seconds;
-}
-
-// Sayfa açıldığında 1. video başlasın
+// Sayfa açıldığında 1. video gelsin
 loadVideo(1);
 </script>
 
