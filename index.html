@@ -2,195 +2,74 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Video Player</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Player - 5 Video</title>
 <style>
-body {
-  background-color: #000;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-}
-h2 { margin-bottom: 20px; }
-
-button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  background-color: #444;
-  color: #fff;
-}
-button:hover { background-color: #666; }
-
-.embed-container {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  background-color: black;
-}
-
-/* Iframe */
-.embed-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* Click Blocker Overlay */
-.click-blocker {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 999;
-  background: transparent;
-}
+body { background:#000; color:#fff; font-family:Arial,sans-serif; text-align:center; margin:0; padding:20px; }
+button { margin:5px; padding:10px 16px; font-size:15px; cursor:pointer; background:#333; color:#fff; border:none; border-radius:6px; }
+button:hover { background:#555; }
+.player-wrapper { position:relative; max-width:800px; margin:20px auto; background:#000; }
+video { width:100%; height:auto; display:none; background:#000; }
 
 /* Spinner */
-.spinner {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #ff0000;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
-
-@keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
+.spinner { width:60px; height:60px; border:6px solid #333; border-top:6px solid #e50914; border-radius:50%; animation:spin 1s linear infinite; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+@keyframes spin { from { transform:translate(-50%,-50%) rotate(0deg);} to { transform:translate(-50%,-50%) rotate(360deg);} }
 </style>
 </head>
 <body>
 
 <h2>Videolar</h2>
 
-<!-- Video Seçim Butonları -->
+<!-- 5 Video Butonu -->
 <button onclick="loadVideo(1)">Video 1</button>
 <button onclick="loadVideo(2)">Video 2</button>
 <button onclick="loadVideo(3)">Video 3</button>
 <button onclick="loadVideo(4)">Video 4</button>
 <button onclick="loadVideo(5)">Video 5</button>
 
-<div class="embed-container" id="videoContainer">
-  <!-- Spinner başta görünür -->
+<div class="player-wrapper">
   <div class="spinner" id="spinner"></div>
+  <video id="player" controls playsinline preload="metadata">
+    Tarayıcın video oynatmayı desteklemiyor.
+  </video>
 </div>
 
 <script>
-// Pornhub embed linkleri (optimize parametreler eklendi)
+// 🔹 Direkt / izinli video linkleri
 const videos = {
-  1: "https://www.pornhub.com/embed/69630dd1c61d5?autoplay=1&player=true&embedplayer=true&noads=1",
-  2: "https://www.pornhub.com/embed/695c1234567890?autoplay=1&player=true&embedplayer=true&noads=1",
-  3: "https://www.pornhub.com/embed/694babcdef1234?autoplay=1&player=true&embedplayer=true&noads=1",
-  4: "https://www.pornhub.com/embed/693a9876543210?autoplay=1&player=true&embedplayer=true&noads=1",
-  5: "https://www.pornhub.com/embed/692f123abc9876?autoplay=1&player=true&embedplayer=true&noads=1"
+  1: "https://x8.proksi.net/video?token=Ux01gc8njvnzxXuaQ-UGIZ6Vwo_uhFK3zWj2lwyw_eHHOAwcvkerW0X4gG4_p8jVC-cVFM3fyBWd697JSCYnPa_Qef6nv46pxMenubBXFBt13p2Ki5YQXoH5KI8-kdUcCVjP_L7gogxZ0bCmAIfacTmhFuD_fnCrPMJes1C6mIc_9_JrHA7eeapMYL8bRuLo0MBE4dre3CC5cTu-PdKryb7EgTykH7ZM01pbCoKCNWu4lUlQX4IZaP-MFX5bU2aOTSiNnk2i7Fkag8CtBh_lNXbPd688qoXa5LEz3ic0cQGjJsoyETGW2pFnzak1Fm7QImNqwch8SCS74GGf0FNNsOGtT4fnXXAYZTcj4f8MPKjJD1HoCWuTmrs8mrBwsp0aVcFpLI1SeBbWrVHEGyjG4EZk1fXt86LsjOhual3wHAQbbmaToePZ6fmBcohcjj1cvhzY3kaS4YMH_mvuRyeHL7i_BMFRl7XRRWguy5L30IfzWEA6HW25Vjok3ZTsDsakjKDoJ8eqB26GUL4-05N3ZVGoDmlx91xc8S_vVuqgOHHMFLzmzomfWe5qVMuYtZ6wWITIptdob1muxvJRD6_TF_IPDx7dehSHTDd_KntBaCwK5M4=",
+  2: "https://example.com/video2.mp4",
+  3: "https://example.com/video3.mp4",
+  4: "https://example.com/video4.mp4",
+  5: "https://example.com/video5.mp4"
 };
 
-function loadVideo(n){
-  const container = document.getElementById("videoContainer");
-  container.innerHTML = ""; // Önceki her şeyi sil
+const player  = document.getElementById("player");
+const spinner = document.getElementById("spinner");
 
-  // Spinner ekle
-  const spinner = document.createElement("div");
-  spinner.className = "spinner";
-  spinner.id = "spinner";
-  container.appendChild(spinner);
+// Video yükleme fonksiyonu
+function loadVideo(id) {
+  spinner.style.display = "block";
+  player.style.display = "none";
 
-  // Click Blocker Overlay ekle
-  const blocker = document.createElement("div");
-  blocker.className = "click-blocker";
-  blocker.id = "clickBlocker";
-  container.appendChild(blocker);
-
-  // Iframe oluştur
-  const iframe = document.createElement("iframe");
-  iframe.id = "phPlayer";
-  iframe.src = videos[n];
-  iframe.allowFullscreen = true;
-  iframe.allow = "autoplay; encrypted-media";
-
-  // **ANA BÖLÜM: CLICK BLOCKER + DIRECTION BLOCK**
-  iframe.onload = function() {
-    // Spinner'ı gizle
-    const sp = document.getElementById("spinner");
-    if(sp) sp.style.display = "none";
-
-    const playerIframe = document.getElementById("phPlayer");
-    const blockerOverlay = document.getElementById("clickBlocker");
-
-    // 1. Container-level click block
-    container.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-    }, true);
-
-    // 2. Iframe click block
-    playerIframe.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-    });
-
-    // 3. Sürekli iframe içi linkleri disable et (en etkili kısım)
-    const killPornhubLinks = setInterval(() => {
-      try {
-        const iframeDoc = playerIframe.contentDocument || playerIframe.contentWindow.document;
-        
-        // Pornhub linkleri, butonlar, iconlar
-        const badLinks = iframeDoc.querySelectorAll(`
-          a[href*="pornhub.com"],
-          a[href*="view_video"],
-          .icon-external,
-          .watch-on-ph,
-          .ph-icon-external,
-          [onclick*="pornhub"],
-          button[onclick*="redirect"]
-        `);
-        
-        badLinks.forEach(link => {
-          link.style.pointerEvents = 'none !important';
-          link.style.cursor = 'default !important';
-          link.onclick = () => false;
-          link.href = 'javascript:void(0)';
-        });
-
-        // Player overlay'leri gizle (isteğe bağlı)
-        const overlays = iframeDoc.querySelectorAll('.player-overlay, .promo-overlay');
-        overlays.forEach(overlay => overlay.style.display = 'none');
-        
-      } catch(e) {
-        // CORS normal, ignore et
-      }
-    }, 800); // Her 0.8 saniyede tarama
-
-    // 45 saniye sonra interval'ı temizle (performans)
-    setTimeout(() => clearInterval(killPornhubLinks), 45000);
-  };
-
-  container.appendChild(iframe);
+  player.src = videos[id];
+  player.load();
 }
 
-// Sayfa açıldığında 1. video yüklensin
+// Video hazır olunca spinner gizle
+player.addEventListener("loadedmetadata", () => {
+  spinner.style.display = "none";
+  player.style.display = "block";
+  player.play();
+});
+
+// Hata olursa uyarı
+player.addEventListener("error", () => {
+  spinner.style.display = "none";
+  alert("Video yüklenemedi.");
+});
+
+// Sayfa açıldığında 1. video otomatik yüklenir
 loadVideo(1);
 </script>
 
